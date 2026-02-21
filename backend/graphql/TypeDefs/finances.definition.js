@@ -7,17 +7,17 @@ const finances = `
         Card1BillDue: String! 
         Card2BillDue: String! 
         GoalAmt: Int! 
-    }, 
+    }
 
     type Query { 
         RaysFinances: [Finances!]!  
-        NumCreditCards: NumOfCreditCards! : Finances!   
-        CreditCardBills: [Card1Bill!, Card2Bill! : Finances! 
-        CreditCardBillDueDates: [Card1BillDue!, Card2BillDue!] : Finances! 
-        RaysGoalAmount: GoalAmt! : Finances! 
+        NumCreditCards: Int! 
+        CreditCardBills: [Int!]! 
+        CreditCardBillDueDates: [String!]! 
+        RaysGoalAmount: Int! 
     } 
     
     type Mutation { 
-        
+        // define the mutations here for everything. 
     }
 `
