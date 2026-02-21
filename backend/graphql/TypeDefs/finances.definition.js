@@ -6,7 +6,8 @@ const finances = `
         Card2Bill: Int!  
         Card1BillDue: String! 
         Card2BillDue: String! 
-        GoalAmt: Int! 
+        GoalAmt: Int!  
+        AccountantAnalysis: String! 
     }
 
     type Query { 
@@ -14,10 +15,11 @@ const finances = `
         NumCreditCards: Int! 
         CreditCardBills: [Int!]! 
         CreditCardBillDueDates: [String!]! 
-        RaysGoalAmount: Int! 
+        RaysGoalAmount: Int!  
+        AccountantAnalysis: Finances! 
     } 
     
     type Mutation { 
-        // define the mutations here for everything. 
+        // define the mutations here for everything for updating the data that i Have and returning. 
     }
 `
