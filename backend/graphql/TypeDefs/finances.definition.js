@@ -22,4 +22,4 @@ const finances = `
     type Mutation { 
         // define the mutations here for everything for updating the data that i Have and returning. 
     }
-`
+`;
