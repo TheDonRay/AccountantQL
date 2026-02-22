@@ -1,11 +1,15 @@
-const finances = ` 
+// instead of defining the card structure multiple times we can just nest the credit card type , just define another structure here as such 
+
+const finances = `   
+    
+    type CreditCard { 
+         bill : Int! 
+         dueDate: String! 
+    }
+
     type Finances { 
         AccountTotal: Int!  
-        NumOfCreditCards: Int!  
-        Card1Bill: Int! 
-        Card2Bill: Int!  
-        Card1BillDue: String! 
-        Card2BillDue: String! 
+        creditCards : [CreditCard!]! 
         GoalAmt: Int!  
         AccountantAnalysis: String! 
     }
