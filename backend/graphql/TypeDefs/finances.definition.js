@@ -8,22 +8,23 @@ const finances = `
     }
 
     type Finances { 
-        AccountTotal: Int!  
+        accountTotal: Int!  
         creditCards : [CreditCard!]! 
-        GoalAmt: Int!  
-        AccountantAnalysis: String! 
+        goalAmt: Int!  
+        accountantAnalysis: String! 
     }
 
     type Query { 
-        RaysFinances: [Finances!]!  
-        NumCreditCards: Int! 
-        CreditCardBills: [Int!]! 
-        CreditCardBillDueDates: [String!]! 
-        RaysGoalAmount: Int!  
-        AccountantAnalysis: Finances! 
+        raysFinances: [Finances!]!  
+        numCreditCards: Int! 
+        creditCardBills: [Int!]! 
+        creditCardBillDueDates: [String!]! 
+        raysGoalAmount: Int!  
+        getAccountantAnalysis: Finances! 
     } 
     
     type Mutation { 
-        // define the mutations here for everything for updating the data that i Have and returning. 
+        createCreditCardBills(bill: Int!, dueDate: String!) : CreditCard! 
+        createFinances(accountTotal: Int!, creditCards: [CreditCard!]!, goalAmt: Int!, accountantAnalysis: String!) : Finances!
     }
 `;
