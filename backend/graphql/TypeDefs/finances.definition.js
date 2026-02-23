@@ -19,12 +19,17 @@ const finances = `
         numCreditCards: Int! 
         creditCardBills: [Int!]! 
         creditCardBillDueDates: [String!]! 
-        raysGoalAmount: Int!  
+        goalAmount: Int!  
         getAccountantAnalysis: Finances! 
     } 
     
+    input CreditCardInput { 
+        bill: Int! 
+        dueDate: String! 
+    } 
+        
     type Mutation { 
         createCreditCardBills(bill: Int!, dueDate: String!) : CreditCard! 
-        createFinances(accountTotal: Int!, creditCards: [CreditCard!]!, goalAmt: Int!, accountantAnalysis: String!) : Finances!
+        createFinances(accountTotal: Int!, creditCards: [CreditCardInput!]!, goalAmt: Int!, accountantAnalysis: String!) : Finances! 
     }
 `;
