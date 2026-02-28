@@ -8,12 +8,29 @@ const FinanceResolvers = {
         raysFinances: async () => { 
             // implement a try and catch case here as such  
             try {
-            const retrieveFinances = await financeModel.find(); 
-            // if its found lets just return i t 
-            return retrieveFinances; 
+                const retrieveFinances = await financeModel.find(); 
+                // if its found lets just return it if not just throw a new error as such 
+                if (!retrieveFinances) { 
+                    throw new Error('Error retrieving rays finances'); 
+                }
+                return retrieveFinances; 
             } catch (error) { 
-                throw new Error('Error cannot retrieve Rays Finances'); 
+                throw new Error('Error cannot retrieve Rays Finances', error); 
+            }
+        }, 
+        
+        numCreditCards: async () => { 
+            try { 
+                // lets search the database here as such 
+                const findCreditCard = await financeModel.find(creditCards); 
+                if (!findCreditCard) { 
+                    throw new Error('No credit card information entered'); 
+                } 
+                return findCreditCard; 
+            } catch (error) { 
+                throw new Error('Error retrieving data on creditcards', error); 
             }
         }
+
     }
 }
