@@ -22,14 +22,18 @@ const FinanceResolvers = {
         numCreditCards: async () => { 
             try { 
                 // lets search the database here as such 
-                const findCreditCard = await financeModel.find(creditCards); 
+                const findCreditCard = await financeModel.findOne(); 
                 if (!findCreditCard) { 
                     throw new Error('No credit card information entered'); 
                 } 
-                return findCreditCard; 
+                return findCreditCard.creditCards.length; 
             } catch (error) { 
                 throw new Error('Error retrieving data on creditcards', error); 
             }
+        }, 
+
+        creditCardBills: async () => { 
+            
         }
 
     }
