@@ -1,7 +1,7 @@
 // this is for my resolvers here 
 // remember we only have resolvers for whereever we have a mutation query or input etc.  
 const financeModel = require('../../model/financedata.model.js'); 
-
+// import the AI part here as well 
 const FinanceResolvers = { 
     Query: { 
         // first resolver is going to be the rays finances which gets data from the database 
@@ -33,8 +33,19 @@ const FinanceResolvers = {
         }, 
 
         creditCardBills: async () => { 
-            
-        }
+            try { 
+                const findBills = await financeModel.findOne(); 
+                // some error checking here as such 
+                if (!findBills) { 
+                    throw new Error('Cannot find credit card bills'); 
+                } 
+                return findBills.creditCards.map(card => card.bill);  
+            } catch (error) { 
+                throw new Error('Error retrieving data from the')
+            }
+        }, 
+
+        
 
     }
 }
