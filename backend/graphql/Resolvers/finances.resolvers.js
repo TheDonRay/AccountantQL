@@ -120,7 +120,11 @@ const FinanceResolvers = {
     }
 }; 
 
-
+const MutationResolver = { 
+    Mutation: { 
+        
+    }
+}
 
 
 //export these resolvers
