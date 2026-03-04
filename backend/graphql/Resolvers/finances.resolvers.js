@@ -41,7 +41,19 @@ const FinanceResolvers = {
                 } 
                 return findBills.creditCards.map(card => card.bill);  
             } catch (error) { 
-                throw new Error('Error retrieving data from the')
+                throw new Error('Error retrieving data from the database', error)
+            }
+        }, 
+
+        creditCardBillDueDates: async () => { 
+            try { 
+                const findDueDates = await financeModel.findOne();  
+                if (!findDueDates) { 
+                    throw new Error('Cannot find bills due dates'); 
+                } 
+                return findDueDates.creditCards.map(card => card.dueDate); 
+            } catch (error) { 
+                throw new Error('Error retrieving data from the database', error); 
             }
         }, 
 
