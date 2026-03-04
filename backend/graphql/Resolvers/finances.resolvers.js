@@ -57,7 +57,24 @@ const FinanceResolvers = {
             }
         }, 
 
-        
+        goalAmount: async () => {  
+            try {
+                const userGoalAmt = await financeModel.findOne(); 
+                if (!userGoalAmt) { 
+                    throw new Error('Error cannot find goalAmount'); 
+                }   
+                return userGoalAmt.goalAmt; 
+            } catch (error) { 
+                throw new Error('Error retrieving data from the backend', error); 
+            }
+        }, 
+
+
+
 
     }
-}
+}; 
+
+
+
+//export these resolvers
