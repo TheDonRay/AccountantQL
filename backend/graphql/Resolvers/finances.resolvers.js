@@ -67,7 +67,9 @@ const FinanceResolvers = {
             } catch (error) { 
                 throw new Error('Error retrieving data from the backend', error); 
             }
-        }, 
+        },  
+
+        // this last one is where we can implement the AI implementation  
 
 
 
