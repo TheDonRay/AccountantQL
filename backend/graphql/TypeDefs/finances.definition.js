@@ -1,4 +1,4 @@
-// instead of defining the card structure multiple times we can just nest the credit card type , just define another structure here as such 
+// instead of defining the card structure multiple times we can just nest the credit card type , just define another structure here as such
 
 const finances = `   
     
