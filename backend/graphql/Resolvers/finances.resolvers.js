@@ -20,7 +20,7 @@ const FinanceResolvers = {
         }
         return retrieveFinances;
       } catch (error) {
-        throw new Error("Error cannot retrieve Rays Finances", error);
+        throw new Error("Error cannot retrieve Rays Finances", { cause: error });
       }
     },
 
@@ -33,7 +33,7 @@ const FinanceResolvers = {
         }
         return findCreditCard.creditCards.length;
       } catch (error) {
-        throw new Error("Error retrieving data on creditcards", error);
+        throw new Error("Error retrieving data on creditcards", { cause: error });
       }
     },
 
@@ -46,7 +46,7 @@ const FinanceResolvers = {
         }
         return findBills.creditCards.map((card) => card.bill);
       } catch (error) {
-        throw new Error("Error retrieving data from the database", error);
+        throw new Error("Error retrieving data from the database", { cause: error });
       }
     },
 
@@ -58,7 +58,7 @@ const FinanceResolvers = {
         }
         return findDueDates.creditCards.map((card) => card.dueDate);
       } catch (error) {
-        throw new Error("Error retrieving data from the database", error);
+        throw new Error("Error retrieving data from the database", { cause: error });
       }
     },
 
@@ -70,11 +70,40 @@ const FinanceResolvers = {
         }
         return userGoalAmt.goalAmt;
       } catch (error) {
-        throw new Error("Error retrieving data from the backend", error);
+        throw new Error("Error retrieving data from the backend", { cause: error });
+      }
+    },
+  },
+};
+
+const MutationResolver = {
+  Mutation: {
+    createCreditCardBills: async (_, { bill, dueDate }) => {
+      try {
+        const financeDoc = await financeModel.findOne();
+        if (!financeDoc) {
+          throw new Error("No finance document found");
+        }
+        const newCard = { bill, dueDate };
+        financeDoc.creditCards.push(newCard);
+        await financeDoc.save();
+        return newCard;
+      } catch (error) {
+        throw new Error("Cannot add credit card bill", { cause: error });
       }
     },
 
-    // this last one is where we can implement the AI implementation
+    createFinances: async (_, { accountTotal, creditCards, goalAmt, accountantAnalysis }) => {
+      try {
+        const clientData = new financeModel({ accountTotal, creditCards, goalAmt, accountantAnalysis });
+        await clientData.save();
+        return clientData;
+      } catch (error) {
+        throw new Error("Unable to add Client Financial Details", { cause: error });
+      }
+    },
+
+    // moved here from Query since it writes to the DB
     getAccountantAnalysis: async () => {
       try {
         const financeData = await financeModel.findOne();
@@ -82,7 +111,7 @@ const FinanceResolvers = {
         if (!financeData) {
           throw new Error("Error finding finance data");
         }
-        //get the entire finances data here as such
+        // get the entire finances data here as such
         const FullFinanceData = {
           AccountBalance: financeData.accountTotal,
           CreditCardInfo: financeData.creditCards,
@@ -103,41 +132,18 @@ const FinanceResolvers = {
             },
           ],
         });
-        // handle some validation here as such
         if (!accountantAnalysis) {
           throw new Error("Error analyzing client financial data");
         }
-        // return the result now as such
-        financeData.accountantAnalysis =
-          accountantAnalysis.choices[0].message.content;
-        // save the data here as such
+        financeData.accountantAnalysis = accountantAnalysis.choices[0].message.content;
         await financeData.save();
-        // finally return it
         return financeData;
       } catch (error) {
-        throw new Error("Error, analysis failed");
+        throw new Error("Error, analysis failed", { cause: error });
       }
     },
   },
 };
 
-const MutationResolver = {
-  Mutation: {
-    createCreditCardBills: async (_, { bill, dueDate }) => {
-      try {
-        const financeDoc = await financeModel.findOne();
-        if (!financeDoc) {
-          throw new Error("No finance document found");
-        }
-        const newCard = { bill, dueDate };
-        financeDoc.creditCards.push(newCard);
-        await financeDoc.save();
-        return newCard;
-      } catch (error) {
-        throw new Error("Cannot add credit card bill", error);
-      }
-    },
-  },
-};
-
-//export these resolvers
+//export these set of resolvers
+module.exports = { FinanceResolvers, MutationResolver };
