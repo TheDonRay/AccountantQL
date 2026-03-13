@@ -24,7 +24,7 @@ const FinanceModel = new mongoose.Schema({
     type: Number,
   },
   accountantAnalysis: {
-    required: true,
+    required: false,
     type: String,
   },
 });

@@ -29,7 +29,7 @@ const finances = `
         
     type Mutation { 
         createCreditCardBills(bill: Int!, dueDate: String!) : CreditCard! 
-        createFinances(accountTotal: Int!, creditCards: [CreditCardInput!]!, goalAmt: Int!, accountantAnalysis: String!) : Finances! 
+        createFinances(accountTotal: Int!, creditCards: [CreditCardInput!]!, goalAmt: Int!, accountantAnalysis: String) : Finances! 
         getAccountantAnalysis: Finances! 
     }
 `; 
