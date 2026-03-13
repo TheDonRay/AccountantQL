@@ -32,4 +32,6 @@ const finances = `
         createFinances(accountTotal: Int!, creditCards: [CreditCardInput!]!, goalAmt: Int!, accountantAnalysis: String!) : Finances! 
         getAccountantAnalysis: Finances! 
     }
-`;
+`; 
+
+module.exports = { finances }; 

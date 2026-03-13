@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(find \"C:/Users/rayat/OneDrive/Desktop/MyProjects/AccountantQL/backend\" -type f -name \"*schema*\" -o -name \"*type*\" 2>/dev/null | head -20)"
-    ]
-  }
-}

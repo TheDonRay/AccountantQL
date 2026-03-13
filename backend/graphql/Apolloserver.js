@@ -1,5 +1,12 @@
 // import the server here as such 
-const apolloserver = require('@apollo/server'); 
+const { Apolloserver } = require('@apollo/server'); 
 // import your resolvers and typeDefs 
-const resolvers = require(); 
-const typeDefs = 
+const { FinanceResolvers, MutationResolver } = require('../graphql/Resolvers/finances.resolvers.js'); 
+const { finances } = require('../graphql/TypeDefs/finances.definition.js');   
+
+const apolloserver = new Apolloserver({ 
+    typeDefs: [finances], 
+    resolvers: [FinanceResolvers, MutationResolver], 
+}); 
+
+module.exports = apolloserver; 
